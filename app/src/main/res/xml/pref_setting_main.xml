@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/testloop">
+
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_run_delay_before"
+            android:summary="3s"
+            android:key="RUN_DELAY_BEFORE"
+            android:defaultValue="3"
+            android:inputType="number|numberSigned|numberDecimal|numberPassword|phone" />
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_run_delay_after"
+            android:summary="3s"
+            android:key="RUN_DELAY_AFTER"
+            android:defaultValue="3"
+            android:inputType="number|numberSigned|numberDecimal|numberPassword|phone" />
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_run_suspend_time"
+            android:summary="5s"
+            android:key="RUN_SUSPEND_TIME"
+            android:defaultValue="5"
+            android:inputType="number|numberSigned|numberDecimal|numberPassword|phone" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/Detection">
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/retry_times"
+            android:summary="10"
+            android:key="RUN_DELAY_BEFORE"
+            android:defaultValue="3"
+            android:inputType="number|numberSigned|numberDecimal|numberPassword|phone" />
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/retry_delay"
+            android:summary="3s"
+            android:key="RUN_DELAY_AFTER"
+            android:defaultValue="3"
+            android:inputType="number|numberSigned|numberDecimal|numberPassword|phone" />
+        <ListPreference
+            android:key="list_preference"
+            android:title="@string/hwfail_action"
+            android:summary="RUN Test after Hardware activate"
+            android:entries="@array/hwfail_action_options"
+            android:entryValues="@array/hwfail_action_options"
+            android:dialogTitle="Choose one" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_group_run_hardwarefunction">
+        <PreferenceScreen android:title="@string/pref_conntype_GPS">
+            <intent android:action="android.intent.action.PREFNET" />
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/pref_conntype_bt">
+            <intent android:action="android.intent.action.PREFBT" />
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/pref_conntype_Wifi">
+            <intent android:action="android.intent.action.PREFNFC" />
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/pref_conntype_Battery">
+            <intent android:action="android.intent.action.PREFREADER" />
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/pref_conntype_vibrate">
+            <intent android:action="android.intent.action.PREFVIBRATOR" />
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/pref_conntype_camera">
+            <intent android:action="android.intent.action.PREFCAMERA" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_group_run_log">
+        <SwitchPreference
+            android:title="@string/pref_run_logdata_battery_info"
+            android:key="RUN_LOGDATA_BATTERY_INFO"/>
+    </PreferenceCategory>
+</PreferenceScreen>

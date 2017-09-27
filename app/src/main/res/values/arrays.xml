@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="loopaction">
+    <item>Continuous</item>
+    <item>Reboot</item>
+    <item>Suspend and Resume</item>
+    </string-array>
+    <string-array name="net_check_device_options">
+        <item>Wi-Fi only</item>
+        <item>Mobile only</item>
+        <item>Wi-Fi &amp; Mobile</item>
+    </string-array>
+    <string-array name="net_check_device_options_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="hwfail_action_options">
+        <item>RUN Test after Hardware activate</item>
+        <item>RUN Test after Retry Times Reach</item>
+        <item>STOP Test after Retry Times Reach</item>
+    </string-array>
+    <string-array name="hwfail_action_options_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="do_action_options">
+        <item>Suspend &amp; Resume</item>
+        <item>Reboot</item>
+        <item>Continuous</item>
+    </string-array>
+    <string-array name="do_action_options_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="run_loop_options">
+        <item>Repeat</item>
+        <item>Fixed</item>
+    </string-array>
+</resources>

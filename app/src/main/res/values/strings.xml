@@ -1,0 +1,110 @@
+<resources>
+    <string name="app_name">StreetTest</string>
+    <string name="loop_action">LOOP ACTION</string>
+    <string name="Bluetooth">Bluetooth</string>
+    <string name="WIFI">Wifi</string>
+    <string name="GPS">GPS</string>
+    <string name="Vibrate">Vibrate</string>
+    <string name="Battery">Battery</string>
+    <string name="Camera">Camera</string>
+    <string name="Close">Close</string>
+    <string name="Start">Start</string>
+    <string name="Stop">Stop</string>
+    <string name="Settings">Settings</string>
+    <string name="Reset">Reset</string>
+    <string name="Import">Import</string>
+    <string name="Export">Export</string>
+    <string name="About">About</string>
+    <string name="testloop">Test Loop</string>
+    <string name="hardwaretest">Hardware Test</string>
+    <string name="pref_run_delay_after">Delay after Hardware Test</string>
+    <string name="pref_run_suspend_time">Suspend time</string>
+    <string name="Detection">Detection</string>
+    <string name="retry_delay">Retry delay</string>
+    <string name="retry_times">Retry times</string>
+    <string name="hwfail_action">Action of HW Failure</string>
+    <string name="pref_group_run_hardwarefunction">Function</string>
+    <string name="pref_conntype_Wifi">Wifi</string>
+    <string name="pref_conntype_Battery">Battery</string>
+    <string name="pref_conntype_GPS">GPS</string>
+    <string name="pref_conntype_bt">Bluetooth</string>
+    <string name="pref_conntype_vibrate">Vibrate</string>
+    <string name="pref_conntype_camera">Camera</string>
+    <string name="pref_group_run_log">Log</string>
+
+
+
+
+
+
+
+    <string name="app_copyright">"Copyright©2017 Cipherlab Co.Ltd.http://www.cipherlab.com/"</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_reset">Reset</string>
+    <string name="action_reset_prompt">Would you like to reset all settings?</string>
+    <string name="action_import">Import</string>
+    <string name="action_export">Export</string>
+    <string name="button_suspend">Suspend</string>
+    <string name="button_reboot">Reboot</string>
+    <string name="button_newrun">New Testing</string>
+    <string name="actstop_waitdialog_title">Stop Test</string>
+    <string name="actstop_waitdialog_message">Please wait ....</string>
+    <string name="pref_looping">Looping</string>
+    <string name="pref_loop_times">Loop times</string>
+    <string name="pref_do_action">Action</string>
+
+    <string name="pref_net_test">Wi-Fi</string>
+    <string name="pref_net_ping_addr">Address</string>
+    <string name="pref_net_ping_timeout">Timeout</string>
+    <string name="pref_bt_test">Bluetooth</string>
+    <string name="pref_bt_datatest_device_addr">Paired Devices</string>
+    <string name="pref_bt_datatest_retry_times">Retry times</string>
+    <string name="pref_nfc_enable_tag_reading">Read Tag ID</string>
+    <string name="pref_nfc_tag_read_timeout">Reading Timeout</string>
+    <string name="pref_group_run">Run</string>
+    <string name="pref_run_delay_before">Delay before Hardware Test</string>
+    <string name="run_loopaction_prompt">Loop Action:</string>
+    <string name="run_loop_prompt">Loops:</string>
+    <string name="run_testnet_prompt">Network:</string>
+    <string name="run_testbt_prompt">Bluetooth:</string>
+    <string name="run_testnfc_prompt">NFC:</string>
+    <string name="run_testreader_prompt">Reader:</string>
+    <string name="run_testvibrator_prompt">Vibrator:</string>
+    <string name="run_testcamera_prompt">Camera:</string>
+    <string name="run_button_start">Start</string>
+    <string name="run_button_stop">Stop</string>
+    <string name="run_button_close">Close</string>
+
+
+    <string name="pref_group_run_delay">Delay</string>
+    <string name="pref_group_run_loopaction">Loop Action</string>
+
+    <string name="pref_reader_enable_verify_barcodedata">Verify Barcode Data</string>
+    <string name="pref_reader_verified_barcodedata">Verified Content</string>
+    <string name="pref_net_check_device">Check Device</string>
+    <string name="pref_group_function_connection">Connection</string>
+    <string name="pref_group_function_transmission">Transmission</string>
+    <string name="pref_group_function_dataaccess">Data Access</string>
+    <string name="pref_group_function_duration">Duration</string>
+    <string name="pref_group_function_onoff">On-Off</string>
+    <string name="pref_group_function_photocapture">Photo Capture</string>
+    <string name="pref_group_function_connection_net">Connection(Ping)</string>
+    <string name="pref_group_function_enable_test">Enable</string>
+    <string name="pref_net_echotest_address">Address</string>
+    <string name="pref_net_echotest_port">Port</string>
+    <string name="pref_net_echotest_datasize">Data Size</string>
+    <string name="pref_net_onofftest_turnoff_delay">Delay after turning off</string>
+    <string name="pref_net_onofftest_turnon_delay">Delay after turning on</string>
+    <string name="pref_bt_onofftest_turnoff_delay">Delay after turning off</string>
+    <string name="pref_bt_onofftest_turnon_delay">Delay after turning on</string>
+    <string name="pref_run_logdata_battery_info">Battery Info</string>
+    <string name="action_about">About</string>
+
+    <string name="pref_vibrator_duration">Duration</string>
+    <string name="pref_vibrator_delay">Delay</string>
+    <string name="pref_vibrator_looptimes">Loop Times</string>
+    <string name="pref_camera_enable_back_camera_test">Back Camera Test</string>
+    <string name="pref_camera_enable_Front_camera_test">Front Camera Test</string>
+    <string name="pref_camera_backcamera_autofocus">Back Camera AutoFocus</string>
+
+</resources>
