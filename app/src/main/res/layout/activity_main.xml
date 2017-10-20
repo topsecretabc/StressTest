@@ -1,211 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
-    android:padding="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_weight="1"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:id="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/loop_action"
-            android:textColor="@color/black" />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:entries="@array/loopaction" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Bluetooth"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/WIFI"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/GPS"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Vibrate"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Battery"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Camera"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
+        android:layout_height="match_parent"></RelativeLayout>
     <LinearLayout
         android:padding="5dp"
-        android:layout_weight="1"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button1"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/red"
-            android:text="@string/Close"
-            android:textColor="@color/white" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <Button
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/red"
-            android:text="@string/Start"
-            android:textColor="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/loop_action"
+                android:textColor="@color/black" />
 
-        <Button
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:entries="@array/loopaction" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/red"
-            android:text="@string/Stop"
-            android:textColor="@color/white" />
+            android:gravity="center_vertical"
+
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/bluetooth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Bluetooth"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/result_bt"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/WIFI"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/result_wifi"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/gps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/GPS"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/result_gps"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/vibrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Vibrate"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/result_vibrate"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/battery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Battery"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/result_bat"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Camera"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/result_cam"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/close"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/Close" />
+
+            <Button
+                android:enabled="false"
+                android:id="@+id/start"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/Start" />
+
+            <Button
+                android:enabled="false"
+                android:id="@+id/stop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/Stop" />
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+
+</RelativeLayout>

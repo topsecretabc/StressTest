@@ -1,4 +1,4 @@
-<resources>
+<resources >
     <string name="app_name">压力测试</string>
     <string name="loop_action">循环</string>
     <string name="Bluetooth">Bluetooth</string>
@@ -17,12 +17,13 @@
     <string name="About">关于</string>
     <string name="testloop">循环</string>
     <string name="hardwaretest">硬件测试</string>
-    <string name="pref_run_delay_after">延迟硬件测试</string>
+    <string name="pref_run_delay_after">延迟时间</string>
+
     <string name="pref_run_suspend_time">暂停时间</string>
     <string name="Detection">发现</string>
-    <string name="retry_delay">重试延迟</string>
+    <string name="retry_delay">重试延迟时间</string>
     <string name="retry_times">重试时间</string>
-    <string name="hwfail_action">硬件故障的动作</string>
+    <string name="hwfail_action">硬件测试失败</string>
     <string name="pref_group_run_hardwarefunction">功能</string>
     <string name="pref_conntype_Wifi">Wifi</string>
     <string name="pref_conntype_Battery">Battery</string>
