@@ -1,5 +1,7 @@
 package com.sagereal.streettest.test.wifi;
 
+import com.sagereal.streettest.TestAct;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -11,7 +13,7 @@ import java.net.Socket;
 
 
 public class NetDataTest extends NetTest {
-
+    private static final String ACT_TITLE = "Wifi Transmission";
     private String mAddr = "";
     private int mPort = 1024;
     private int mRepeatTimes = 8;
@@ -62,7 +64,7 @@ public class NetDataTest extends NetTest {
                     SendProgressMsg(this.mUid, desc);
                 }
                 SendProgressMsg(this.mUid, "Complete");
-//                TestAct.SendLogMsg(String.format("[TEST] %1$s: OK", new Object[]{ACT_TITLE}));
+                TestAct.SendLogMsg(String.format("[TEST] %1$s: OK", new Object[]{ACT_TITLE}));
                 socket = socket2;
             } catch (InterruptedException e) {
                 ex = e;
@@ -71,26 +73,11 @@ public class NetDataTest extends NetTest {
                 ex2 = e2;
                 socket = socket2;
             }
-//        } catch (InterruptedException e3) {
-//            ex = e3;
-//            ex.printStackTrace();
-//            if (socket != null) {
-//                try {
-//                    socket.close();
-//                } catch (Exception ex22) {
-////                    TestAct.SendLogMsg(String.format("[TEST] %1$s: Close Socket Exception(%2$s)", new Object[]{ACT_TITLE, ex22.getMessage()}));
-//                    ex22.printStackTrace();
-//                    return;
-//                }
-//            }
         } catch (Exception e4) {
             ex2 = e4;
-//            TestAct.SendLogMsg(String.format("[TEST] %1$s: Exception(%2$s)", new Object[]{ACT_TITLE, ex22.getMessage()}));
+            TestAct.SendLogMsg(String.format("[TEST] %1$s: Exception(%2$s)", new Object[]{ACT_TITLE, ex2.getMessage()}));
             SendProgressMsg(this.mUid, "Failed!");
             ex2.printStackTrace();
-//            if (socket != null) {
-//                socket.close();
-//            }
         } finally {
             try {
                 if (socket != null)
@@ -99,9 +86,6 @@ public class NetDataTest extends NetTest {
                 e.printStackTrace();
             }
         }
-//        if (socket != null) {
-//            socket.close();
-//        }
     }
 }
 

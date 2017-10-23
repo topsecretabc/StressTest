@@ -2,6 +2,8 @@ package com.sagereal.streettest.test.wifi;
 
 import android.net.wifi.WifiManager;
 
+import com.sagereal.streettest.TestAct;
+
 public class NetOnOffTest extends NetTest {
     private static final String ACT_TITLE = "Network On/Off";
     private static final int ONOFF_DELAY = 10;
@@ -28,7 +30,7 @@ public class NetOnOffTest extends NetTest {
 
     public void execute() {
         String desc = "";
-//        String logDesc = "";
+        String logDesc = "";
         try {
             desc = "Turning Off Wi-Fi";
             SendProgressMsg(this.mUid, new StringBuilder(String.valueOf(desc)).append(" ...").toString());
@@ -39,20 +41,20 @@ public class NetOnOffTest extends NetTest {
                 if (turnOnWifi()) {
                     Thread.sleep((long) (this.mOnDelay * 1000));
                     SendProgressMsg(this.mUid, "Complete");
-//                    TestAct.SendLogMsg(String.format("[TEST] %1$s: OK", new Object[]{ACT_TITLE}));
+                    TestAct.SendLogMsg(String.format("[TEST] %1$s: OK", new Object[]{ACT_TITLE}));
                     return;
                 }
-//                logDesc = "[TEST] %1$s: " + desc + " Failed!";
+                logDesc = "[TEST] %1$s: " + desc + " Failed!";
                 SendProgressMsg(this.mUid, "On Failed!!");
-//                TestAct.SendLogMsg(String.format(logDesc, new Object[]{ACT_TITLE}));
+                TestAct.SendLogMsg(String.format(logDesc, new Object[]{ACT_TITLE}));
                 return;
             }
-//            logDesc = "[TEST] %1$s: " + desc + " Failed!";
+            logDesc = "[TEST] %1$s: " + desc + " Failed!";
             SendProgressMsg(this.mUid, "Off Failed!!");
-//            TestAct.SendLogMsg(String.format(logDesc, new Object[]{ACT_TITLE}));
+            TestAct.SendLogMsg(String.format(logDesc, new Object[]{ACT_TITLE}));
         } catch (InterruptedException e) {
         } catch (Exception ex) {
-//            TestAct.SendLogMsg(String.format("[TEST] %1$s: Exception(%2$s)", new Object[]{ACT_TITLE, ex.getMessage()}));
+            TestAct.SendLogMsg(String.format("[TEST] %1$s: Exception(%2$s)", new Object[]{ACT_TITLE, ex.getMessage()}));
             SendProgressMsg(this.mUid, "Failed!");
             ex.printStackTrace();
         }

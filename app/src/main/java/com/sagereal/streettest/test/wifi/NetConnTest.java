@@ -1,8 +1,11 @@
 package com.sagereal.streettest.test.wifi;
 
+import com.sagereal.streettest.TestAct;
+
 import java.io.IOException;
 
 public class NetConnTest extends NetTest {
+    private static final String ACT_TITLE = "Wifi Transmission";
     private String mAddr = "127.0.0.1";
     private int mTimeout = 3;
 
@@ -27,15 +30,15 @@ public class NetConnTest extends NetTest {
             SendProgressMsg(this.mUid, "Ping " + this.mAddr);
             if (doPing(this.mAddr, this.mTimeout).booleanValue()) {
                 desc = "Complete";
-//                TestAct.SendLogMsg(String.format("[TEST] %1$s: OK", new Object[]{ACT_TITLE}));
+                TestAct.SendLogMsg(String.format("[TEST] %1$s: OK", new Object[]{ACT_TITLE}));
             } else {
                 desc = "Timeout";
-//                TestAct.SendLogMsg(String.format("[TEST] %1$s: Timeout", new Object[]{ACT_TITLE}));
+                TestAct.SendLogMsg(String.format("[TEST] %1$s: Timeout", new Object[]{ACT_TITLE}));
             }
             SendProgressMsg(this.mUid, desc);
         } catch (InterruptedException e) {
         } catch (Exception ex) {
-//            TestAct.SendLogMsg(String.format("[TEST] %1$s: Exception(%2$s)", new Object[]{ACT_TITLE, ex.getMessage()}));
+            TestAct.SendLogMsg(String.format("[TEST] %1$s: Exception(%2$s)", new Object[]{ACT_TITLE, ex.getMessage()}));
             SendProgressMsg(this.mUid, "Failed!");
             ex.printStackTrace();
         }
