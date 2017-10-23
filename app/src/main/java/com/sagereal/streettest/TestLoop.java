@@ -5,9 +5,6 @@ import android.os.Handler;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by gms on 17-10-12.
- */
 
 public class TestLoop extends Thread {
     private List<TestAct> mTestActList;

@@ -3,7 +3,6 @@ package com.sagereal.streettest.test.wifi;
 import java.io.IOException;
 
 public class NetConnTest extends NetTest {
-    private static final String ACT_TITLE = "Network Connection";
     private String mAddr = "127.0.0.1";
     private int mTimeout = 3;
 

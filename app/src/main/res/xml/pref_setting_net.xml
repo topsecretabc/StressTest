@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_group_function_connection_net">
+
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_net_ping_addr"
+            android:key="NET_PING_ADDR"
+            android:summary="127.0.0.1"
+            android:defaultValue="127.0.0.1" />
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_net_ping_timeout"
+            android:key="NET_PING_TIMEOUT"
+            android:summary="3"
+            android:defaultValue="3"
+            android:inputType="number" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_group_function_transmission">
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_net_echotest_address"
+            android:key="NET_ECHOTEST_ADDR"
+            android:defaultValue="127.0.0.1"
+            android:summary="127.0.0.1"/>
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_net_echotest_port"
+            android:key="NET_ECHOTEST_PORT"
+            android:defaultValue="1024"
+            android:inputType="number"
+            android:summary="1024"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_group_function_onoff">
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_net_onofftest_turnoff_delay"
+            android:key="NET_ONOFFTEST_TURNOFF_DELAY"
+            android:defaultValue="5"
+            android:inputType="number"
+            android:summary="5"/>
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_net_onofftest_turnon_delay"
+            android:key="NET_ONOFFTEST_TURNON_DELAY"
+            android:defaultValue="5"
+            android:inputType="number"
+            android:summary="5"/>
+    </PreferenceCategory>
+</PreferenceScreen>

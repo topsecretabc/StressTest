@@ -3,16 +3,4 @@
     <item
         android:id="@+id/menu_settings"
         android:title="@string/Settings"/>
-    <item
-        android:id="@+id/menu_reset"
-        android:title="@string/Reset"/>
-    <item
-        android:id="@+id/menu_import"
-        android:title="@string/Import"/>
-    <item
-        android:id="@+id/menu_export"
-        android:title="@string/Export"/>
-    <item
-        android:id="@+id/menu_about"
-        android:title="@string/About"/>
 </menu>

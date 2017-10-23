@@ -41,6 +41,45 @@
         </activity>
         <activity android:name=".SettingActivity"></activity>
 
+        <activity android:theme="@style/AppTheme"
+            android:label="@string/pref_conntype_Wifi"
+            android:name="com.sagereal.streettest.settings.SettingPrefNet"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MPREFNET" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/AppTheme"
+            android:label="@string/pref_conntype_bt"
+            android:name="com.sagereal.streettest.settings.SettingPrefBt"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MPREFBT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:theme="@style/AppTheme"
+            android:label="@string/pref_conntype_vibrate"
+            android:name="com.sagereal.streettest.settings.SettingPrefVibrator"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MPREFVIBRATOR" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:theme="@style/AppTheme"
+            android:label="@string/pref_conntype_camera"
+            android:name="com.sagereal.streettest.settings.SettingPrefCamera"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MPREFCAMERA" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <receiver android:name="com.sagereal.streettest.SysIntentReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

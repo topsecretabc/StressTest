@@ -1,13 +1,13 @@
 package com.sagereal.streettest;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.DhcpInfo;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,24 +31,24 @@ import android.widget.Toast;
 
 import com.sagereal.streettest.log.TestRun;
 import com.sagereal.streettest.log.TestRunLog;
+import com.sagereal.streettest.settings.SettingPrefBt;
+import com.sagereal.streettest.settings.SettingPrefNet;
 import com.sagereal.streettest.test.bat.BatteryTest;
 import com.sagereal.streettest.test.bt.BtDataTest;
 import com.sagereal.streettest.test.bt.BtOnOffTest;
 import com.sagereal.streettest.test.camera.BackCameraCaptureTest;
+import com.sagereal.streettest.test.camera.FrontCameraCaptureTest;
 import com.sagereal.streettest.test.gps.GPSTest;
 import com.sagereal.streettest.test.vibrator.VibratorTest;
 import com.sagereal.streettest.test.wifi.NetConnTest;
 import com.sagereal.streettest.test.wifi.NetDataTest;
 import com.sagereal.streettest.test.wifi.NetOnOffTest;
+import com.sagereal.streettest.util.CameraUtil;
 
 public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
     private static final String TAG = "mainactivity";
     public static final String HANDLER_FIELD_DESC = "desc";
     public static final String HANDLER_FIELD_UID = "uid";
-    public static final String PREF_BT_DATATEST_DEVICE_ADDR = "BT_DATATEST_DEVICE_ADDR";
-    private static final String BT_DATATEST_DEVICE_ADDR_DEFAULT = "";
-    public static final String PREF_BT_ONOFFTEST_TURNOFF_DELAY = "BT_ONOFFTEST_TURNOFF_DELAY";
-    public static final String PREF_BT_ONOFFTEST_TURNON_DELAY = "BT_ONOFFTEST_TURNON_DELAY";
     private Button start, stop;
     private boolean isRunning = false;
     private TestLoop testLoop;
@@ -60,6 +60,20 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     private int doAction;
     private TestRun testRun = null;
     public static TestRunLog testRunLog = null;
+    private BroadcastReceiver mBroadcast = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(MainActivity.BROADCAST_MESSAGE_AUTO_RESUME)) {
+                MainActivity.this.mSuspendResumeIntent = null;
+                if (((PowerManager) MainActivity.this.getSystemService(Context.POWER_SERVICE)).isScreenOn()) {
+                    if (isRunning) handler.sendEmptyMessage(1);
+                    return;
+                }
+                PressKey(26);
+            }
+        }
+    };
+
 
     private Handler handler = new Handler() {
         @Override
@@ -71,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                         public void run() {
                             startTest();
                         }
-                    }, 3000);
+                    }, SettingActivity.getIntervalsTime(MainActivity.this)*1000);
 
                     break;
                 case 2:
@@ -112,7 +126,9 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     //
     private void initView() {
-
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BROADCAST_MESSAGE_AUTO_RESUME);
+        registerReceiver(this.mBroadcast, filter);
         start = (Button) findViewById(R.id.start);
         stop = (Button) findViewById(R.id.stop);
         checkBoxBt = (CheckBox) findViewById(R.id.bluetooth);
@@ -129,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         resultCam = (TextView) findViewById(R.id.result_cam);
         relativeLayout = (RelativeLayout) findViewById(R.id.relativelayout);
         spinner = (Spinner) findViewById(R.id.spinner);
-
         checkBoxBt.setOnCheckedChangeListener(this);
         checkBoxWifi.setOnCheckedChangeListener(this);
         checkBoxGPS.setOnCheckedChangeListener(this);
@@ -139,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         start.setOnClickListener(this);
         stop.setOnClickListener(this);
     }
-
 
     private void showUi() {
         start.setEnabled(true);
@@ -166,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         checkBoxCam.setEnabled(false);
     }
 
-
     private void startTest() {
         if (!isRunning) return;
         setTitle(getResources().getString(R.string.app_name) + "(" + (count + 1) + ")");
@@ -177,43 +190,31 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
         if (checkBoxBt.isChecked()) {
             BtDataTest act3 = new BtDataTest(1);
-            String string = SettingPref.getSettingSharedPreferences(this).getString(PREF_BT_DATATEST_DEVICE_ADDR, BT_DATATEST_DEVICE_ADDR_DEFAULT);
-            Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
-            act3.setAddr(string);
-            act3.setRetryTimes(5);
+//            String string = SettingPref.getSettingSharedPreferences(this).getString(PREF_BT_DATATEST_DEVICE_ADDR, BT_DATATEST_DEVICE_ADDR_DEFAULT);
+//            Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+            act3.setAddr(SettingPrefBt.getBtDataTestDeviceAddress(this));
+            act3.setRetryTimes(SettingPrefBt.getBtDataTestRetryTimes(this));
             this.testLoop.add(act3);
             BtOnOffTest act4 = new BtOnOffTest(1);
-            act4.setOffDelay(Integer.parseInt(SettingPref.getSettingSharedPreferences(this).getString(PREF_BT_ONOFFTEST_TURNOFF_DELAY, Integer.toString(5))));
-            act4.setOnDelay(Integer.parseInt(SettingPref.getSettingSharedPreferences(this).getString(PREF_BT_ONOFFTEST_TURNON_DELAY, Integer.toString(5))));
+            act4.setOffDelay(SettingPrefBt.getBtOnOffTestTurnOffDelay(this));
+            act4.setOnDelay(SettingPrefBt.getBtOnOffTestTurnOnDelay(this));
             this.testLoop.add(act4);
         }
         if (checkBoxWifi.isChecked()) {
-            WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-            ConnectivityManager mConnManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = mConnManager.getActiveNetworkInfo();
-            if (wifiManager != null
-                    && wifiManager.getWifiState() == 3
-                    && (networkInfo != null || networkInfo.getType() == 1)
-                    && networkInfo.isConnected()) {
-//            WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
-                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                String IPAddress = intToIp(wifiInfo.getIpAddress());
-                Log.e("qwer", IPAddress);
-                DhcpInfo dhcpinfo = wifiManager.getDhcpInfo();
-                String serverAddress = intToIp(dhcpinfo.serverAddress);
                 NetConnTest act = new NetConnTest(2);
-                act.setAddr("127.0.0.1");
-                act.setTimeout(3);
+                act.setAddr(SettingPrefNet.getNetPingAddr(this));
+                act.setTimeout(SettingPrefNet.getNetPingTimeout(this));
                 this.testLoop.add(act);
                 NetDataTest act2 = new NetDataTest(2);
-                act2.setAddr(IPAddress);
-                act2.setPort(1024);
-                act2.setRepeatTimes(8);
+                act2.setAddr(SettingPrefNet.getNetEchoTestAddr(this));
+                Log.e("asdf",""+SettingPrefNet.getNetEchoTestAddr(this));
+                act2.setPort(SettingPrefNet.getNetEchoTestPort(this));
+                act2.setRepeatTimes(SettingPrefNet.getNetEchoTestDataRepeatTimes(this));
                 this.testLoop.add(act2);
                 NetOnOffTest act3 = new NetOnOffTest(2);
                 act3.setWifiManager((WifiManager) getSystemService(Context.WIFI_SERVICE));
-                act3.setOffDelay(5);
-                act3.setOnDelay(5);
+                act3.setOffDelay(SettingPrefNet.getNetOnOffTestTurnOffDelay(this));
+                act3.setOnDelay(SettingPrefNet.getNetOnOffTestTurnOnDelay(this));
                 this.testLoop.add(act3);
 //            WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
 //            if (!wifiManager.isWifiEnabled()) {
@@ -228,9 +229,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 //            String serverAddress = intToIp(dhcpinfo.serverAddress);
 //            System.out.println("serverAddress-->>" + serverAddress);
 //            其中IPAddress 是本机的IP地址，serverAddress 是你所连接的wifi热点对应的IP地址
-            } else {
-                Toast.makeText(this, "failed", Toast.LENGTH_LONG).show();
-            }
         }
 
         //
@@ -253,24 +251,22 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             testLoop.add(act);
         }
         if (checkBoxCam.isChecked()) {
-            BackCameraCaptureTest act1 = new BackCameraCaptureTest(6, new SurfaceView(MainActivity.this), "test");
-            act1.setAutoFocus(true);
-            act1.setMainActivity(MainActivity.this);
-            act1.setRelativeLayout(relativeLayout);
-            testLoop.add(act1);
-            //
-            /*FrontCameraCaptureTest act2 = new FrontCameraCaptureTest(6, new SurfaceView(MainActivity.this), "test");
-            act2.setMainActivity(MainActivity.this);
-            act2.setRelativeLayout(relativeLayout);
-            testLoop.add(act2);*/
+            if (CameraUtil.hasBackFacingCamera()) {
+                BackCameraCaptureTest act1 = new BackCameraCaptureTest(6, new SurfaceView(MainActivity.this), "test");
+                act1.setAutoFocus(true);
+                act1.setMainActivity(MainActivity.this);
+                act1.setRelativeLayout(relativeLayout);
+                testLoop.add(act1);
+            }
+            if (CameraUtil.hasFrontFacingCamera()) {
+                FrontCameraCaptureTest act2 = new FrontCameraCaptureTest(6, new SurfaceView(MainActivity.this), "test");
+                act2.setMainActivity(MainActivity.this);
+                act2.setRelativeLayout(relativeLayout);
+                testLoop.add(act2);
+            }
         }
         setText();
         testLoop.start();
-    }
-
-    private String intToIp(int paramInt) {
-        return (paramInt & 0xFF) + "." + (0xFF & paramInt >> 8) + "." + (0xFF & paramInt >> 16) + "."
-                + (0xFF & paramInt >> 24);
     }
 
     private void endTest() {
@@ -279,7 +275,9 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         if (testLoop != null && testLoop.isAlive())
             testLoop.interrupt();
         testLoop = null;
-        if (++count < 3) {
+        int times = SettingActivity.getTestTimes(this);
+        Log.e("asdf",""+times);
+        if (++count < times) {
             doActionComplate();
         } else {
             SettingPrefMain.setIsloop(this, false);
@@ -295,8 +293,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         }
     }
 
+    private PendingIntent mSuspendResumeIntent;
+    private static final String BROADCAST_MESSAGE_AUTO_RESUME = "com.cipherlab.stresstest.AUTO_RESUME";
+
     private void doActionComplate() {
-        // AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         if (doAction == 0) {
             if (isRunning) handler.sendEmptyMessage(1);
@@ -306,10 +307,29 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             SettingPrefMain.setIsloop(this, true);
             pm.reboot("FORCE Reboot");
         } else {
-            if (isRunning) handler.sendEmptyMessage(1);
+            //if (isRunning) handler.sendEmptyMessage(1);
+            mSuspendResumeIntent = PendingIntent.getBroadcast(this, 0, new Intent(BROADCAST_MESSAGE_AUTO_RESUME), 0);
+            long wakeTime = SettingActivity.getOffTime(this)*1000;
+            if (Build.VERSION.SDK_INT >= 23) {
+                am.setExactAndAllowWhileIdle(0, wakeTime, mSuspendResumeIntent);
+            } else if (Build.VERSION.SDK_INT >= 19) {
+                am.setExact(0, wakeTime, mSuspendResumeIntent);
+            } else {
+                am.set(0, wakeTime, mSuspendResumeIntent);
+            }
+            if (pm.isScreenOn()) {
+                PressKey(26);
+            }
         }
+    }
 
-
+    private void PressKey(int Key) {
+        try {
+            String keyCmd = String.format("input keyevent %d", new Object[]{Integer.valueOf(Key)});
+            Runtime.getRuntime().exec(new String[]{"sh", "-c", keyCmd}).waitFor();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 

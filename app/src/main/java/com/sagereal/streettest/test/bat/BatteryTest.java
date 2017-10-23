@@ -11,7 +11,7 @@ import android.util.Log;
 import com.sagereal.streettest.TestAct;
 
 /**
- * Created by gms on 17-10-19.
+ * Created by chenxuelian on 17-09-25.
  */
 
 public class BatteryTest extends TestAct {

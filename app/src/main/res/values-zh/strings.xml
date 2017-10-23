@@ -17,11 +17,11 @@
     <string name="About">关于</string>
     <string name="testloop">循环</string>
     <string name="hardwaretest">硬件测试</string>
-    <string name="pref_run_delay_after">延迟时间</string>
+    <string name="pref_run_times">测试次数</string>
 
-    <string name="pref_run_suspend_time">暂停时间</string>
-    <string name="Detection">发现</string>
-    <string name="retry_delay">重试延迟时间</string>
+    <string name="Intervals_time">间隔时间</string>
+    <string name="Off_screen">关屏</string>
+    <string name="off_time">关屏时间</string>
     <string name="retry_times">重试时间</string>
     <string name="hwfail_action">硬件测试失败</string>
     <string name="pref_group_run_hardwarefunction">功能</string>

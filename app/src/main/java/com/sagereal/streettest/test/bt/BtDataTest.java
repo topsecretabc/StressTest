@@ -11,9 +11,15 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * Created by licong on 17-09-25.
+ */
+
+
 public class BtDataTest extends BtTest {
     private static final String ACT_TITLE = "Bt Transmission";
     private String mAddr = "";
+    private String mMac = "";
     private int mRetryTimes = 3;
 
     public BtDataTest(int uid) {
@@ -41,8 +47,8 @@ public class BtDataTest extends BtTest {
             for (Iterator<BluetoothDevice> iterator = devices.iterator(); iterator.hasNext(); ) {
                 BluetoothDevice bluetoothDevice = (BluetoothDevice) iterator.next();
                 String name = bluetoothDevice.getName();
-                if (name.equals("hhhhh")) {
-                    mAddr = bluetoothDevice.getAddress();
+                if (name.equals(this.mAddr)) {
+                    mMac = bluetoothDevice.getAddress();
                 }
             }
         }
@@ -55,7 +61,7 @@ public class BtDataTest extends BtTest {
                         prog = 0;
                         try {
                             SendProgressMsg(this.mUid, "Start");
-                            socket = adapter.getRemoteDevice(this.mAddr).createRfcommSocketToServiceRecord(this.SPP_UUID);
+                            socket = adapter.getRemoteDevice(this.mMac).createRfcommSocketToServiceRecord(this.SPP_UUID);
                             steps++;//1
                             retry = 0;
                             break;
@@ -102,6 +108,7 @@ public class BtDataTest extends BtTest {
                 if (retry >= this.mRetryTimes) {
                     SendProgressMsg(this.mUid, "Failed");
                     TestAct.SendLogMsg(String.format("[TEST] %1$s: Exception(%2$s)", new Object[]{ACT_TITLE, errMsg}));
+                    isTesting = false;
                 }
             }
             if (socket != null) {

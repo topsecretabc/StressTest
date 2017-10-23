@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_group_function_duration">
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_vibrator_duration"
+            android:key="VIBRATOR_DURATION"
+            android:defaultValue="3000"
+            android:inputType="number"
+            android:summary="3000"/>
+    </PreferenceCategory>
+</PreferenceScreen>

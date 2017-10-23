@@ -4,6 +4,10 @@ import android.bluetooth.BluetoothAdapter;
 
 import com.sagereal.streettest.TestAct;
 
+/**
+ * Created by licong on 17-09-25.
+ */
+
 public class BtOnOffTest extends BtTest {
     private static final String ACT_TITLE = "Bt On/Off";
     private int mOffDelay = 5;

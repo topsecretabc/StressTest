@@ -1,7 +1,5 @@
 package com.sagereal.streettest.test.wifi;
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -13,7 +11,7 @@ import java.net.Socket;
 
 
 public class NetDataTest extends NetTest {
-    private static final String ACT_TITLE = "Network Transmission";
+
     private String mAddr = "";
     private int mPort = 1024;
     private int mRepeatTimes = 8;
@@ -43,7 +41,6 @@ public class NetDataTest extends NetTest {
 
         try {
             Socket socket2 = new Socket(InetAddress.getByName(this.mAddr), this.mPort);
-            Log.e("zxcv", socket2 + "");
             try {
                 int i;
                 PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket2.getOutputStream())), true);
@@ -63,7 +60,6 @@ public class NetDataTest extends NetTest {
                     br.readLine();
                     Thread.sleep(100);
                     SendProgressMsg(this.mUid, desc);
-                    Log.e("", "licongaaa");
                 }
                 SendProgressMsg(this.mUid, "Complete");
 //                TestAct.SendLogMsg(String.format("[TEST] %1$s: OK", new Object[]{ACT_TITLE}));

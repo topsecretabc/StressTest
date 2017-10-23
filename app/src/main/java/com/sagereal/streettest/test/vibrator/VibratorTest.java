@@ -5,14 +5,12 @@ import android.os.Vibrator;
 import com.sagereal.streettest.TestAct;
 
 /**
- * Created by gms on 17-10-19.
+ * Created by chenxuelian on 17-09-25.
  */
 
 public class VibratorTest extends TestAct {
     private static final String ACT_TITLE = "Vibrator Duration";
-    private int mDelay = 0;
-    private int mDuration = 500;
-    private int mLoopTimes = 1;
+    private int mDuration = 1000;
     private Vibrator vibrator;
 
     public void setVibrator(Vibrator vibrator) {

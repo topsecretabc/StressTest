@@ -3,6 +3,8 @@ package com.sagereal.streettest;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.sagereal.streettest.settings.SettingPref;
+
 public class SettingPrefMain extends SettingPref {
 
     public static final String MAIN_BLUETOOTH = "MAIN_BT";
@@ -16,16 +18,13 @@ public class SettingPrefMain extends SettingPref {
     public static final String MAIN_ISLOOP = "MAIN_ISLOOP";
     public static final String MAIN_RUNID = "MAIN_RUNID";
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-
     protected void onResume() {
         super.onResume();
     }
-
 
     public static boolean getBluetooth(Context context) {
         return getSettingSharedPreferences(context).getBoolean(MAIN_BLUETOOTH, false);

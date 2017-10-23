@@ -26,6 +26,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Created by duxinyun on 17-09-25.
+ */
+
+
 public abstract class CameraCaptureTest extends CameraTest {
     protected static final String ACT_TITLE = "Camera Photo Capture";
     private static final String TAG = "cameracapturetest";

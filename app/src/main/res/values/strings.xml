@@ -18,10 +18,10 @@
     <string name="About">About</string>
     <string name="testloop">Test Loop</string>
     <string name="hardwaretest">Hardware Test</string>
-    <string name="pref_run_delay_after">Delay after Hardware Test</string>
-    <string name="pref_run_suspend_time">Suspend time</string>
-    <string name="Detection">Detection</string>
-    <string name="retry_delay">Retry delay</string>
+    <string name="pref_run_times">Test Times</string>
+    <string name="Intervals_time">Intervals time</string>
+    <string name="Off_screen">Off screen</string>
+    <string name="off_time">Off Time</string>
     <string name="retry_times">Retry times</string>
     <string name="hwfail_action">Action of HW Failure</string>
     <string name="pref_group_run_hardwarefunction">Function</string>

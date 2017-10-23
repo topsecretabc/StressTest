@@ -5,6 +5,10 @@ import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
 import android.view.SurfaceView;
 
+/**
+ * Created by duxinyun on 17-09-25.
+ */
+
 public class BackCameraCaptureTest extends CameraCaptureTest {
     private AutoFocusCallback autoFocusCallback;
     private boolean mIsAutoFocus = false;

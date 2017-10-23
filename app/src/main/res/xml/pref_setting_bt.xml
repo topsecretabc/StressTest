@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_group_function_transmission">
+        <EditTextPreference
+            android:title="@string/pref_bt_datatest_device_addr"
+            android:key="BT_DATATEST_DEVICE_ADDR"
+            android:defaultValue="NONE"
+            android:summary="NONE"
+            />
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_bt_datatest_retry_times"
+            android:key="BT_DATATEST_RETRY_TIMES"
+            android:defaultValue="3"
+            android:inputType="number"
+            android:summary="3"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_group_function_onoff">
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:summary="5"
+            android:title="@string/pref_bt_onofftest_turnoff_delay"
+            android:key="BT_ONOFFTEST_TURNOFF_DELAY"
+            android:defaultValue="5"
+            android:inputType="number"
+            />
+        <EditTextPreference
+            android:summary="5"
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_bt_onofftest_turnon_delay"
+            android:key="BT_ONOFFTEST_TURNON_DELAY"
+            android:defaultValue="5"
+            android:inputType="number"
+            />
+    </PreferenceCategory>
+</PreferenceScreen>

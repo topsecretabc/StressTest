@@ -1,4 +1,4 @@
-package com.sagereal.streettest;
+package com.sagereal.streettest.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,7 +13,7 @@ public class SettingPref extends PreferenceActivity {
         getPreferenceManager().setSharedPreferencesName(SETTING_PREF_NAME);
     }
 
-    protected static SharedPreferences getSettingSharedPreferences(Context context) {
+    public static SharedPreferences getSettingSharedPreferences(Context context) {
         return context.getSharedPreferences(SETTING_PREF_NAME, 0);
     }
 }

@@ -20,8 +20,9 @@ import com.sagereal.streettest.TestAct;
 import java.util.Iterator;
 
 /**
- * Created by gms on 17-10-10.
+ * Created by duxinyun on 17-09-25.
  */
+
 
 public class GPSTest extends TestAct {
     protected static final String ACT_TITLE = "GPS Capture";
