@@ -10,7 +10,7 @@ import com.sagereal.streettest.TestAct;
 
 public class VibratorTest extends TestAct {
     private static final String ACT_TITLE = "Vibrator Duration";
-    private int mDuration = 1000;
+    private int mDuration = 1;
     private Vibrator vibrator;
 
     public void setVibrator(Vibrator vibrator) {
@@ -21,17 +21,20 @@ public class VibratorTest extends TestAct {
         super(uid);
     }
 
+    public void setDuration(int duration) {
+        this.mDuration = duration;
+    }
+
     @Override
     public void execute() {
-        int sec = 0;
         vibrate();
 
     }
 
     private void vibrate() {
-        TestAct.SendProgressMsg(mUid, "s");
+        TestAct.SendProgressMsg(mUid, "start");
         if (vibrator.hasVibrator()) {
-            vibrator.vibrate(mDuration);
+            vibrator.vibrate(mDuration * 1000);
             TestAct.SendProgressMsg(mUid, "Complete");
             TestAct.SendLogMsg(String.format("[TEST] %1$s: OK", new Object[]{ACT_TITLE}));
         } else {

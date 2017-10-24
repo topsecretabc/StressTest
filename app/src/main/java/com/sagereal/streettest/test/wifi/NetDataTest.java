@@ -75,7 +75,7 @@ public class NetDataTest extends NetTest {
             }
         } catch (Exception e4) {
             ex2 = e4;
-            TestAct.SendLogMsg(String.format("[TEST] %1$s: Exception(%2$s)", new Object[]{ACT_TITLE, ex2.getMessage()}));
+           TestAct.SendLogMsg(String.format("[TEST] %1$s: Exception(%2$s)", new Object[]{ACT_TITLE, ex2.getMessage()}));
             SendProgressMsg(this.mUid, "Failed!");
             ex2.printStackTrace();
         } finally {

@@ -32,7 +32,9 @@ import android.widget.Toast;
 import com.sagereal.streettest.log.TestRun;
 import com.sagereal.streettest.log.TestRunLog;
 import com.sagereal.streettest.settings.SettingPrefBt;
+import com.sagereal.streettest.settings.SettingPrefCamera;
 import com.sagereal.streettest.settings.SettingPrefNet;
+import com.sagereal.streettest.settings.SettingPrefVibrator;
 import com.sagereal.streettest.test.bat.BatteryTest;
 import com.sagereal.streettest.test.bt.BtDataTest;
 import com.sagereal.streettest.test.bt.BtOnOffTest;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     private static final String TAG = "mainactivity";
     public static final String HANDLER_FIELD_DESC = "desc";
     public static final String HANDLER_FIELD_UID = "uid";
-    private Button start, stop;
+    private Button start, stop, close;
     private boolean isRunning = false;
     private TestLoop testLoop;
     private RelativeLayout relativeLayout;
@@ -60,16 +62,19 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     private int doAction;
     private TestRun testRun = null;
     public static TestRunLog testRunLog = null;
+    private int[] resultComplete = new int[]{0, 0, 0, 0, 0, 0};
+
+
     private BroadcastReceiver mBroadcast = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(MainActivity.BROADCAST_MESSAGE_AUTO_RESUME)) {
                 MainActivity.this.mSuspendResumeIntent = null;
-                if (((PowerManager) MainActivity.this.getSystemService(Context.POWER_SERVICE)).isScreenOn()) {
+                PressKey(26);
+                if (((PowerManager) getSystemService(Context.POWER_SERVICE)).isScreenOn()) {
                     if (isRunning) handler.sendEmptyMessage(1);
                     return;
                 }
-                PressKey(26);
             }
         }
     };
@@ -85,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                         public void run() {
                             startTest();
                         }
-                    }, SettingActivity.getIntervalsTime(MainActivity.this)*1000);
+                    }, SettingActivity.getIntervalsTime(MainActivity.this) * 1000);
 
                     break;
                 case 2:
@@ -131,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         registerReceiver(this.mBroadcast, filter);
         start = (Button) findViewById(R.id.start);
         stop = (Button) findViewById(R.id.stop);
+        close= (Button) findViewById(R.id.close);
         checkBoxBt = (CheckBox) findViewById(R.id.bluetooth);
         checkBoxWifi = (CheckBox) findViewById(R.id.wifi);
         checkBoxGPS = (CheckBox) findViewById(R.id.gps);
@@ -153,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         checkBoxCam.setOnCheckedChangeListener(this);
         start.setOnClickListener(this);
         stop.setOnClickListener(this);
+        close.setOnClickListener(this);
     }
 
     private void showUi() {
@@ -201,21 +208,21 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             this.testLoop.add(act4);
         }
         if (checkBoxWifi.isChecked()) {
-                NetConnTest act = new NetConnTest(2);
-                act.setAddr(SettingPrefNet.getNetPingAddr(this));
-                act.setTimeout(SettingPrefNet.getNetPingTimeout(this));
-                this.testLoop.add(act);
-                NetDataTest act2 = new NetDataTest(2);
-                act2.setAddr(SettingPrefNet.getNetEchoTestAddr(this));
-                Log.e("asdf",""+SettingPrefNet.getNetEchoTestAddr(this));
-                act2.setPort(SettingPrefNet.getNetEchoTestPort(this));
-                act2.setRepeatTimes(SettingPrefNet.getNetEchoTestDataRepeatTimes(this));
-                this.testLoop.add(act2);
-                NetOnOffTest act3 = new NetOnOffTest(2);
-                act3.setWifiManager((WifiManager) getSystemService(Context.WIFI_SERVICE));
-                act3.setOffDelay(SettingPrefNet.getNetOnOffTestTurnOffDelay(this));
-                act3.setOnDelay(SettingPrefNet.getNetOnOffTestTurnOnDelay(this));
-                this.testLoop.add(act3);
+            NetConnTest act = new NetConnTest(2);
+            act.setAddr(SettingPrefNet.getNetPingAddr(this));
+            act.setTimeout(SettingPrefNet.getNetPingTimeout(this));
+            this.testLoop.add(act);
+            NetDataTest act2 = new NetDataTest(2);
+            act2.setAddr(SettingPrefNet.getNetEchoTestAddr(this));
+            Log.e("asdf", "" + SettingPrefNet.getNetEchoTestAddr(this));
+            act2.setPort(SettingPrefNet.getNetEchoTestPort(this));
+            act2.setRepeatTimes(SettingPrefNet.getNetEchoTestDataRepeatTimes(this));
+            this.testLoop.add(act2);
+            NetOnOffTest act3 = new NetOnOffTest(2);
+            act3.setWifiManager((WifiManager) getSystemService(Context.WIFI_SERVICE));
+            act3.setOffDelay(SettingPrefNet.getNetOnOffTestTurnOffDelay(this));
+            act3.setOnDelay(SettingPrefNet.getNetOnOffTestTurnOnDelay(this));
+            this.testLoop.add(act3);
 //            WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
 //            if (!wifiManager.isWifiEnabled()) {
 //                System.out.println("=================");
@@ -240,9 +247,10 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         //
 
 
-        if (checkBoxVibrate.isChecked()){
-            VibratorTest act=new VibratorTest(4);
+        if (checkBoxVibrate.isChecked()) {
+            VibratorTest act = new VibratorTest(4);
             act.setVibrator((Vibrator) getSystemService(Context.VIBRATOR_SERVICE));
+            act.setDuration(SettingPrefVibrator.getVibratorDuration(this));
             testLoop.add(act);
         }
         if (checkBoxBat.isChecked()) {
@@ -251,14 +259,14 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             testLoop.add(act);
         }
         if (checkBoxCam.isChecked()) {
-            if (CameraUtil.hasBackFacingCamera()) {
+            if (CameraUtil.hasBackFacingCamera() && SettingPrefCamera.getEnableCameraBackCameraTest(this)) {
                 BackCameraCaptureTest act1 = new BackCameraCaptureTest(6, new SurfaceView(MainActivity.this), "test");
-                act1.setAutoFocus(true);
+                act1.setAutoFocus(SettingPrefCamera.getEnableCameraBackCameraAutoFocus(this));
                 act1.setMainActivity(MainActivity.this);
                 act1.setRelativeLayout(relativeLayout);
                 testLoop.add(act1);
             }
-            if (CameraUtil.hasFrontFacingCamera()) {
+            if (CameraUtil.hasFrontFacingCamera() && SettingPrefCamera.getEnableCameraFrontCameraTest(this)) {
                 FrontCameraCaptureTest act2 = new FrontCameraCaptureTest(6, new SurfaceView(MainActivity.this), "test");
                 act2.setMainActivity(MainActivity.this);
                 act2.setRelativeLayout(relativeLayout);
@@ -276,13 +284,14 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             testLoop.interrupt();
         testLoop = null;
         int times = SettingActivity.getTestTimes(this);
-        Log.e("asdf",""+times);
+        Log.e("asdf", "" + times);
         if (++count < times) {
             doActionComplate();
         } else {
             SettingPrefMain.setIsloop(this, false);
             count = 0;
             showUi();
+            writeResult();
             testRunLog = null;
         }
     }
@@ -309,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         } else {
             //if (isRunning) handler.sendEmptyMessage(1);
             mSuspendResumeIntent = PendingIntent.getBroadcast(this, 0, new Intent(BROADCAST_MESSAGE_AUTO_RESUME), 0);
-            long wakeTime = SettingActivity.getOffTime(this)*1000;
+            long wakeTime = SettingActivity.getOffTime(this) * 1000;
             if (Build.VERSION.SDK_INT >= 23) {
                 am.setExactAndAllowWhileIdle(0, wakeTime, mSuspendResumeIntent);
             } else if (Build.VERSION.SDK_INT >= 19) {
@@ -342,6 +351,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         SettingPrefMain.setIsloop(this, false);
         setText();
         setTitle(getResources().getString(R.string.app_name));
+        writeResult();
         testRunLog = null;
 
     }
@@ -358,7 +368,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     private void HandleProgressMessage(Bundle data) {
         TextView txt;
-        switch (data.getInt(HANDLER_FIELD_UID)) {
+        int uid = data.getInt(HANDLER_FIELD_UID);
+        switch (uid) {
             case 1:
                 txt = resultBt;
                 break;
@@ -382,6 +393,32 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         }
         String desc = data.getString(HANDLER_FIELD_DESC, "");
         txt.setText(desc);
+        if (desc.contains("Failed") || desc.contains("failed")) {
+            resultComplete[uid - 1] = ++resultComplete[uid - 1];
+        }
+    }
+
+
+    private void writeResult() {
+        if (checkBoxBt.isChecked()) {
+            LogRunInfo("Bluetooth:" + (resultComplete[0] > 0 ? "Failed" : " Complete"));
+        }
+        if (checkBoxWifi.isChecked()) {
+            LogRunInfo("Wifi:" + (resultComplete[1] > 0 ? "Failed" : " Complete"));
+        }
+        if (checkBoxGPS.isChecked()) {
+            LogRunInfo("Gps:" + (resultComplete[2] > 0 ? "Failed" : " Complete"));
+        }
+        if (checkBoxVibrate.isChecked()) {
+            LogRunInfo("Vibrate:" + (resultComplete[3] > 0 ? "Failed" : " Complete"));
+        }
+        if (checkBoxBat.isChecked()) {
+            LogRunInfo("Battery:" + (resultComplete[4] > 0 ? "Failed" : " Complete"));
+        }
+        if (checkBoxCam.isChecked()) {
+            LogRunInfo("Camera:" + (resultComplete[5] > 0 ? "Failed" : " Complete"));
+        }
+        resultComplete = new int[]{0, 0, 0, 0, 0, 0};
     }
 
     private void savePrefs() {
@@ -489,6 +526,9 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                 isRunning = false;
                 showUi();
                 stopTest();
+                break;
+            case R.id.close:
+                finish();
                 break;
         }
     }

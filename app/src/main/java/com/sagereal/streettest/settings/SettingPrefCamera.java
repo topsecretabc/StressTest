@@ -1,26 +1,25 @@
 package com.sagereal.streettest.settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SwitchPreference;
 
 import com.sagereal.streettest.R;
 
-/**
- * Created by gms on 17-10-20.
- */
 
 public class SettingPrefCamera extends SettingPref {
     public static final String PREF_CAMERA_BACKCAMERA_AUTOFOCUS = "CAMERA_BACKCAMERA_AUTOFOCUS";
     public static final String PREF_CAMERA_ENABLE_BACK_CAMERA_TEST = "CAMERA_ENABLE_BACK_CAMERA_TEST";
     public static final String PREF_CAMERA_ENABLE_FRONT_CAMERA_TEST = "CAMERA_ENABLE_FRONT_CAMERA_TEST";
-    private Preference.OnPreferenceChangeListener myPrefListener = new Preference.OnPreferenceChangeListener() {
+    private OnPreferenceChangeListener myPrefListener = new OnPreferenceChangeListener() {
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             String key = preference.getKey();
-            if (key.equals(PREF_CAMERA_ENABLE_BACK_CAMERA_TEST)) {
-                swtCameraBackCameraAutoFocus.setEnabled(((Boolean) newValue).booleanValue());
-            } else if (!key.equals(PREF_CAMERA_ENABLE_FRONT_CAMERA_TEST)) {
-                key.equals(PREF_CAMERA_BACKCAMERA_AUTOFOCUS);
+            if (key.equals(SettingPrefCamera.PREF_CAMERA_ENABLE_BACK_CAMERA_TEST)) {
+                SettingPrefCamera.this.swtCameraBackCameraAutoFocus.setEnabled(((Boolean) newValue).booleanValue());
+            } else if (!key.equals(SettingPrefCamera.PREF_CAMERA_ENABLE_FRONT_CAMERA_TEST)) {
+                key.equals(SettingPrefCamera.PREF_CAMERA_BACKCAMERA_AUTOFOCUS);
             }
             return true;
         }
@@ -36,17 +35,36 @@ public class SettingPrefCamera extends SettingPref {
     }
 
     private void initViews() {
-        swtCameraEnableBackCameraTest = (SwitchPreference) findPreference(PREF_CAMERA_ENABLE_BACK_CAMERA_TEST);
-        swtCameraEnableBackCameraTest.setOnPreferenceChangeListener(myPrefListener);
-        swtCameraBackCameraAutoFocus = (SwitchPreference) findPreference(PREF_CAMERA_BACKCAMERA_AUTOFOCUS);
-        swtCameraBackCameraAutoFocus.setOnPreferenceChangeListener(myPrefListener);
-        swtCameraEnableFrontCameraTest = (SwitchPreference) findPreference(PREF_CAMERA_ENABLE_FRONT_CAMERA_TEST);
-        swtCameraEnableFrontCameraTest.setOnPreferenceChangeListener(myPrefListener);
+        this.swtCameraEnableBackCameraTest = (SwitchPreference) findPreference(PREF_CAMERA_ENABLE_BACK_CAMERA_TEST);
+        this.swtCameraEnableBackCameraTest.setOnPreferenceChangeListener(this.myPrefListener);
+        this.swtCameraBackCameraAutoFocus = (SwitchPreference) findPreference(PREF_CAMERA_BACKCAMERA_AUTOFOCUS);
+        this.swtCameraBackCameraAutoFocus.setOnPreferenceChangeListener(this.myPrefListener);
+        this.swtCameraEnableFrontCameraTest = (SwitchPreference) findPreference(PREF_CAMERA_ENABLE_FRONT_CAMERA_TEST);
+        this.swtCameraEnableFrontCameraTest.setOnPreferenceChangeListener(this.myPrefListener);
     }
 
     protected void onResume() {
         super.onResume();
-        swtCameraBackCameraAutoFocus.setEnabled(swtCameraEnableBackCameraTest.isChecked());
+        this.swtCameraBackCameraAutoFocus.setEnabled(this.swtCameraEnableBackCameraTest.isChecked());
     }
+
+
+
+    public static Boolean getEnableCameraBackCameraTest(Context context) {
+        return getSettingSharedPreferences(context).getBoolean(PREF_CAMERA_ENABLE_BACK_CAMERA_TEST, true);
+    }
+
+
+
+    public static Boolean getEnableCameraFrontCameraTest(Context context) {
+        return getSettingSharedPreferences(context).getBoolean(PREF_CAMERA_ENABLE_FRONT_CAMERA_TEST, true);
+    }
+
+
+
+    public static Boolean getEnableCameraBackCameraAutoFocus(Context context) {
+        return getSettingSharedPreferences(context).getBoolean(PREF_CAMERA_BACKCAMERA_AUTOFOCUS, true);
+    }
+
 
 }

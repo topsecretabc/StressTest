@@ -47,7 +47,7 @@ public class BtOnOffTest extends BtTest {
                     desc = "Failed!";
                     logDesc = "[TEST] %1$s: Turning Off BT Fail!";
                 } else if (bOnRtn) {
-                    desc = "Complete!";
+                    desc = "OnOff Complete!";
                     logDesc = "[TEST] %1$s: OK";
                 } else {
                     desc = "Failed!";

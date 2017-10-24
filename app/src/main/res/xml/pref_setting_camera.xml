@@ -2,12 +2,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/pref_group_function_photocapture">
         <SwitchPreference
+            android:defaultValue="true"
             android:key="CAMERA_ENABLE_BACK_CAMERA_TEST"
             android:title="@string/pref_camera_enable_back_camera_test" />
         <SwitchPreference
+            android:defaultValue="true"
             android:key="CAMERA_BACKCAMERA_AUTOFOCUS"
             android:title="@string/pref_camera_backcamera_autofocus" />
         <SwitchPreference
+            android:defaultValue="true"
             android:key="CAMERA_ENABLE_FRONT_CAMERA_TEST"
             android:title="@string/pref_camera_enable_Front_camera_test" />
     </PreferenceCategory>

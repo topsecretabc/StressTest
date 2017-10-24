@@ -7,8 +7,8 @@
             android:selectAllOnFocus="true"
             android:title="@string/pref_vibrator_duration"
             android:key="VIBRATOR_DURATION"
-            android:defaultValue="3000"
+            android:defaultValue="1"
             android:inputType="number"
-            android:summary="3000"/>
+            android:summary="1s"/>
     </PreferenceCategory>
 </PreferenceScreen>

@@ -99,7 +99,7 @@ public class BtDataTest extends BtTest {
                         break;
                     case 3:
                         // prog = 100;
-                        SendProgressMsg(this.mUid, "Complete");
+                        SendProgressMsg(this.mUid, "Data Complete");
                         TestAct.SendLogMsg(String.format("[TEST] %1$s: OK", ACT_TITLE));
                         isTesting = false;
                         break;
