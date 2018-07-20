@@ -14,6 +14,6 @@ public class SettingPref extends PreferenceActivity {
     }
 
     public static SharedPreferences getSettingSharedPreferences(Context context) {
-        return context.getSharedPreferences(SETTING_PREF_NAME, 0);
+        return context.getSharedPreferences(SETTING_PREF_NAME, Context.MODE_PRIVATE);
     }
 }

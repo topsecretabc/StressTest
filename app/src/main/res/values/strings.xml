@@ -32,6 +32,7 @@
     <string name="pref_conntype_vibrate">Vibrate</string>
     <string name="pref_conntype_camera">Camera</string>
     <string name="pref_group_run_log">Log</string>
+    <string name="pref_group_test_report">Test report</string>
 
 
 

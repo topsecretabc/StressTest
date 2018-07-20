@@ -122,9 +122,9 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             spinner.setSelection(1);
             hideUi();
             startTest();
-        } else {
-            // testRun = new TestRun();
-            // testRun.setup(this);
+        }
+        if (!((PowerManager) getSystemService(Context.POWER_SERVICE)).isScreenOn()){
+            PressKey(26);
         }
 
     }
@@ -134,23 +134,23 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         IntentFilter filter = new IntentFilter();
         filter.addAction(BROADCAST_MESSAGE_AUTO_RESUME);
         registerReceiver(this.mBroadcast, filter);
-        start = (Button) findViewById(R.id.start);
-        stop = (Button) findViewById(R.id.stop);
-        close= (Button) findViewById(R.id.close);
-        checkBoxBt = (CheckBox) findViewById(R.id.bluetooth);
-        checkBoxWifi = (CheckBox) findViewById(R.id.wifi);
-        checkBoxGPS = (CheckBox) findViewById(R.id.gps);
-        checkBoxVibrate = (CheckBox) findViewById(R.id.vibrate);
-        checkBoxBat = (CheckBox) findViewById(R.id.battery);
-        checkBoxCam = (CheckBox) findViewById(R.id.camera);
-        resultBt = (TextView) findViewById(R.id.result_bt);
-        resultWifi = (TextView) findViewById(R.id.result_wifi);
-        resultGPS = (TextView) findViewById(R.id.result_gps);
-        resultVibrate = (TextView) findViewById(R.id.result_vibrate);
-        resultBat = (TextView) findViewById(R.id.result_bat);
-        resultCam = (TextView) findViewById(R.id.result_cam);
-        relativeLayout = (RelativeLayout) findViewById(R.id.relativelayout);
-        spinner = (Spinner) findViewById(R.id.spinner);
+        start = findViewById(R.id.start);
+        stop = findViewById(R.id.stop);
+        close= findViewById(R.id.close);
+        checkBoxBt = findViewById(R.id.bluetooth);
+        checkBoxWifi = findViewById(R.id.wifi);
+        checkBoxGPS = findViewById(R.id.gps);
+        checkBoxVibrate = findViewById(R.id.vibrate);
+        checkBoxBat = findViewById(R.id.battery);
+        checkBoxCam = findViewById(R.id.camera);
+        resultBt = findViewById(R.id.result_bt);
+        resultWifi = findViewById(R.id.result_wifi);
+        resultGPS = findViewById(R.id.result_gps);
+        resultVibrate = findViewById(R.id.result_vibrate);
+        resultBat = findViewById(R.id.result_bat);
+        resultCam = findViewById(R.id.result_cam);
+        relativeLayout = findViewById(R.id.relativelayout);
+        spinner = findViewById(R.id.spinner);
         checkBoxBt.setOnCheckedChangeListener(this);
         checkBoxWifi.setOnCheckedChangeListener(this);
         checkBoxGPS.setOnCheckedChangeListener(this);
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             act2.setRepeatTimes(SettingPrefNet.getNetEchoTestDataRepeatTimes(this));
             this.testLoop.add(act2);
             NetOnOffTest act3 = new NetOnOffTest(2);
-            act3.setWifiManager((WifiManager) getSystemService(Context.WIFI_SERVICE));
+            act3.setWifiManager((WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE));
             act3.setOffDelay(SettingPrefNet.getNetOnOffTestTurnOffDelay(this));
             act3.setOnDelay(SettingPrefNet.getNetOnOffTestTurnOnDelay(this));
             this.testLoop.add(act3);
@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         }
     }
 
-    public void LogRunInfo(String data) {
+    private void LogRunInfo(String data) {
         if (testRunLog != null) {
             testRunLog.writeLine(data);
         }
@@ -320,11 +320,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             mSuspendResumeIntent = PendingIntent.getBroadcast(this, 0, new Intent(BROADCAST_MESSAGE_AUTO_RESUME), 0);
             long wakeTime = SettingActivity.getOffTime(this) * 1000;
             if (Build.VERSION.SDK_INT >= 23) {
-                am.setExactAndAllowWhileIdle(0, wakeTime, mSuspendResumeIntent);
+                am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, wakeTime, mSuspendResumeIntent);
             } else if (Build.VERSION.SDK_INT >= 19) {
-                am.setExact(0, wakeTime, mSuspendResumeIntent);
+                am.setExact(AlarmManager.RTC_WAKEUP, wakeTime, mSuspendResumeIntent);
             } else {
-                am.set(0, wakeTime, mSuspendResumeIntent);
+                am.set(AlarmManager.RTC_WAKEUP, wakeTime, mSuspendResumeIntent);
             }
             if (pm.isScreenOn()) {
                 PressKey(26);
@@ -528,8 +528,22 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                 stopTest();
                 break;
             case R.id.close:
+                isRunning = false;
+                showUi();
+                stopTest();
                 finish();
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mBroadcast);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
 }

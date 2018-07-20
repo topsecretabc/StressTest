@@ -1,16 +1,16 @@
 package com.sagereal.streettest;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
+
 import com.sagereal.streettest.settings.SettingPref;
 
 public class SettingActivity extends SettingPref {
-    public static final String RUN_TIMES = "RUN_TIMES";
-    public static final String INTERVALS_TIME = "INTERVALS_TIME";
-    public static final String RUN_OFF_TIME = "OFF_TIME";
+    private static final String RUN_TIMES = "RUN_TIMES";
+    private static final String INTERVALS_TIME = "INTERVALS_TIME";
+    private static final String RUN_OFF_TIME = "OFF_TIME";
     private EditTextPreference edtTestTimes;
     private EditTextPreference edtIntervalsTime;
     private EditTextPreference edtOffTime;

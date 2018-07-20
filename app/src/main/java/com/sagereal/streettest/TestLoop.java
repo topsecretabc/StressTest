@@ -28,7 +28,7 @@ public class TestLoop extends Thread {
         for (TestAct act : mTestActList) {
             mCurrAct = act;
             act.execute();
-            if (isRunning == false) break;
+            if (!isRunning) break;
         }
         TestAct.SendEndMsg();
 

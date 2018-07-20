@@ -11,7 +11,8 @@ public class SysIntentReceiver extends BroadcastReceiver {
             if (SettingPrefMain.getIsloop(context)) {
                 Intent it = new Intent();
                 it.setClass(context, MainActivity.class);
-                it.setFlags(268435456);
+                //it.setFlags(268435456);
+                it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(it);
                 return;
             }

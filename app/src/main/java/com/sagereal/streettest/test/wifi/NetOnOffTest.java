@@ -69,7 +69,7 @@ public class NetOnOffTest extends NetTest {
                 }
                 Thread.sleep(10);
             }
-            while (this.mWifi.getWifiState() != 1) {
+            while (this.mWifi.getWifiState() != WifiManager.WIFI_STATE_DISABLED) {
                 if (System.currentTimeMillis() - start > 5000) {
                     return false;
                 }
@@ -92,7 +92,7 @@ public class NetOnOffTest extends NetTest {
                 }
                 Thread.sleep(10);
             }
-            while (this.mWifi.getWifiState() != 3) {
+            while (this.mWifi.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
                 if (System.currentTimeMillis() - start > 5000) {
                     return false;
                 }

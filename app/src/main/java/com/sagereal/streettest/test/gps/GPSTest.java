@@ -107,7 +107,7 @@ public class GPSTest extends TestAct {
         public void onGpsStatusChanged(int event) {
             //LocationProvider.OUT_OF_SERVICE
             Log.i(TAG, "now gps status changed,the event is: " + event);
-            if (ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (mActivity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
             GpsStatus status = mLocationManager.getGpsStatus(null);

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:keepScreenOn="true"
     >
     <RelativeLayout
         android:id="@+id/relativelayout"
@@ -24,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:text="@string/loop_action"
                 android:textColor="@color/black" />
 
@@ -57,7 +58,7 @@
 
             <TextView
                 android:id="@+id/result_bt"
-                android:gravity="right"
+                android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black" />
@@ -83,7 +84,7 @@
 
             <TextView
                 android:id="@+id/result_wifi"
-                android:gravity="right"
+                android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black" />
@@ -109,7 +110,7 @@
 
             <TextView
                 android:id="@+id/result_gps"
-                android:gravity="right"
+                android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black" />
@@ -135,7 +136,7 @@
 
             <TextView
                 android:id="@+id/result_vibrate"
-                android:gravity="right"
+                android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black" />
@@ -161,7 +162,7 @@
 
             <TextView
                 android:id="@+id/result_bat"
-                android:gravity="right"
+                android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black" />
@@ -188,7 +189,7 @@
 
             <TextView
                 android:id="@+id/result_cam"
-                android:gravity="right"
+                android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black" />

@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TestRun {
-    private static final String RESULT_ROOT_DIR = "StressLog";
+    private static final String RESULT_ROOT_DIR = "StressTestLog/";
     private String mId;
     private File mResultPath;
 
@@ -37,7 +37,7 @@ public class TestRun {
     }
 
     public String getResultDir() {
-        return "sssssLog/" + this.mId;
+        return RESULT_ROOT_DIR + this.mId;
     }
 
     private static String generateId() {

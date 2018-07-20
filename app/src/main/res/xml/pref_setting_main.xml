@@ -47,5 +47,10 @@
         <SwitchPreference
             android:title="@string/pref_run_logdata_battery_info"
             android:key="RUN_LOGDATA_BATTERY_INFO"/>
+        <PreferenceScreen
+            android:title="@string/pref_group_test_report"
+            android:summary="/sdcard/StressTestLog"
+            >
+        </PreferenceScreen>
     </PreferenceCategory>
 </PreferenceScreen>
